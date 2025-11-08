@@ -1,0 +1,2311 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <title>Think &amp; Cite – فكّر &amp; وثّق</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Think &amp; Cite helps you plan, write, and polish your academic work calmly and professionally in English and Arabic, from first question to final reference list.">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-deep-indigo: #1B2559;
+      --color-accent-teal: #1EB5A6;
+      --color-warm-gold: #F4C76B;
+      --color-bg-soft: #F5F7FB;
+      --color-bg-card: #FFFFFF;
+      --color-soft-sky: #E4F5F4;
+      --color-text-main: #111827;
+      --color-text-muted: #6B7280;
+      --shadow-soft: 0 12px 30px rgba(15, 23, 42, 0.08);
+      --radius-card: 16px;
+      --radius-pill: 999px;
+      --transition-fast: 0.18s ease-out;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--color-bg-soft);
+      color: var(--color-text-main);
+      line-height: 1.6;
+    }
+
+    .text-ar {
+      font-family: 'Cairo', 'Tahoma', sans-serif;
+    }
+
+    body[data-lang="en"] .text-ar {
+      display: none !important;
+    }
+
+    body[data-lang="ar"] .text-en {
+      display: none !important;
+    }
+
+    body[data-lang="ar"] {
+      direction: rtl;
+      text-align: right;
+    }
+
+    body[data-lang="en"] {
+      direction: ltr;
+      text-align: left;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(1120px, 100% - 32px);
+      margin-inline: auto;
+    }
+
+    /* Header */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(245, 247, 251, 0.95);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid #E5E7EB;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      padding: 12px 0;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: radial-gradient(circle at 20% 20%, #1EB5A6 0, #1B2559 60%, #111827 100%);
+      position: relative;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.2);
+    }
+
+    .logo-mark::before {
+      content: "";
+      position: absolute;
+      inset: 6px 8px 8px 10px;
+      border-radius: 6px;
+      background: #F5F7FB;
+    }
+
+    .logo-mark::after {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+      background: #1EB5A6;
+      right: 7px;
+      bottom: 7px;
+      box-shadow: 0 0 0 2px rgba(27, 181, 166, 0.25);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      font-size: 0.9rem;
+    }
+
+    .brand-line-main {
+      font-weight: 600;
+      color: var(--color-deep-indigo);
+      letter-spacing: 0.02em;
+    }
+
+    .brand-line-sub {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      margin-inline-start: auto;
+    }
+
+    .nav-list {
+      list-style: none;
+      display: flex;
+      gap: 18px;
+      padding: 0;
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+    }
+
+    .nav-list a {
+      position: relative;
+      padding-block: 4px;
+    }
+
+    .nav-list a::after {
+      content: "";
+      position: absolute;
+      inset-inline: 0;
+      bottom: -4px;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--color-accent-teal);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform var(--transition-fast);
+    }
+
+    .nav-list a:hover::after,
+    .nav-list a:focus-visible::after {
+      transform: scaleX(1);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 0.88rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast), transform 0.12s ease-out;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--color-accent-teal);
+      color: #FFFFFF;
+      box-shadow: 0 10px 20px rgba(27, 181, 166, 0.25);
+    }
+
+    .btn-primary:hover {
+      background: #18a196;
+      transform: translateY(-1px);
+      box-shadow: 0 12px 24px rgba(27, 181, 166, 0.3);
+    }
+
+    .btn-secondary {
+      background: #FFFFFF;
+      color: var(--color-deep-indigo);
+      border-color: rgba(148, 163, 184, 0.6);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--color-deep-indigo);
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--color-deep-indigo);
+      border-color: rgba(148, 163, 184, 0.8);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
+    }
+
+    .lang-switch {
+      display: inline-flex;
+      padding: 2px;
+      border-radius: 999px;
+      background: #E5E7EB;
+      gap: 2px;
+    }
+
+    .lang-btn {
+      border: none;
+      background: transparent;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      color: #4B5563;
+      transition: background var(--transition-fast), color var(--transition-fast);
+    }
+
+    .lang-btn.active {
+      background: #FFFFFF;
+      color: var(--color-deep-indigo);
+      box-shadow: 0 0 0 1px rgba(148, 163, 184, 0.8);
+    }
+
+    .nav-toggle {
+      display: none;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      border-radius: 999px;
+      background: #111827;
+      margin: 4px 0;
+      transition: transform var(--transition-fast), opacity var(--transition-fast);
+    }
+
+    /* Sections */
+    section {
+      padding-block: 56px;
+    }
+
+    .section-hero {
+      padding-block: 64px 48px;
+      background: radial-gradient(circle at top left, rgba(27, 181, 166, 0.08), transparent 55%), var(--color-bg-soft);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.1fr);
+      gap: 32px;
+      align-items: flex-start;
+    }
+
+    .hero-kicker {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--color-accent-teal);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .hero-title {
+      font-size: clamp(1.9rem, 3vw, 2.4rem);
+      line-height: 1.2;
+      color: var(--color-deep-indigo);
+      margin: 0 0 14px;
+    }
+
+    .hero-subtitle {
+      color: var(--color-text-muted);
+      font-size: 0.98rem;
+      max-width: 38rem;
+      margin: 0 0 18px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .icon-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 8px;
+    }
+
+    .icon-list li {
+      position: relative;
+      padding-inline-start: 24px;
+      font-size: 0.92rem;
+      color: var(--color-text-main);
+    }
+
+    .icon-list li::before {
+      content: "";
+      position: absolute;
+      top: 0.55em;
+      inset-inline-start: 0;
+      width: 11px;
+      height: 11px;
+      border-radius: 3px;
+      border: 1.6px solid var(--color-deep-indigo);
+      box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.06);
+      background:
+        radial-gradient(circle at 70% 70%, #1EB5A6 0, #1EB5A6 60%, transparent 61%);
+    }
+
+    .hero-card {
+      background: linear-gradient(145deg, #FFFFFF, #F9FAFB);
+      border-radius: 20px;
+      padding: 20px 20px 18px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(27, 181, 166, 0.06);
+      color: var(--color-accent-teal);
+      font-size: 0.75rem;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .pill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--color-accent-teal);
+    }
+
+    .hero-card-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-deep-indigo);
+      margin: 0 0 6px;
+    }
+
+    .hero-card-body {
+      font-size: 0.88rem;
+      color: var(--color-text-muted);
+      margin: 0 0 10px;
+    }
+
+    .hero-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .hero-card-tag {
+      font-size: 0.75rem;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: #E5E7EB;
+      color: #4B5563;
+    }
+
+    /* Trust strip */
+    .trust-strip {
+      background: #FFFFFF;
+      border-top: 1px solid #E5E7EB;
+      border-bottom: 1px solid #E5E7EB;
+      padding-block: 10px;
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+    }
+
+    .trust-strip-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-align: center;
+    }
+
+    .trust-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--color-accent-teal);
+    }
+
+    /* Generic section styles */
+    .section-header {
+      margin-bottom: 26px;
+      max-width: 40rem;
+    }
+
+    .section-kicker {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--color-accent-teal);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      color: var(--color-deep-indigo);
+      margin: 0 0 8px;
+    }
+
+    .section-subtitle {
+      font-size: 0.95rem;
+      color: var(--color-text-muted);
+      margin: 0;
+    }
+
+    /* Cards & grids */
+    .card-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .card-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: #FFFFFF;
+      border-radius: var(--radius-card);
+      padding: 18px 18px 18px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+    }
+
+    .card-header {
+      margin-bottom: 10px;
+    }
+
+    .card-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-deep-indigo);
+      margin: 0 0 4px;
+    }
+
+    .card-subtitle {
+      font-size: 0.88rem;
+      color: var(--color-text-muted);
+      margin: 0;
+    }
+
+    .card-body {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+    }
+
+    .card-body p {
+      margin: 0 0 8px;
+    }
+
+    /* Services */
+    .services-section {
+      background: #FFFFFF;
+    }
+
+    .service-card ul {
+      margin-top: 10px;
+    }
+
+    /* How to get started */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .step-label {
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-weight: 600;
+      color: var(--color-accent-teal);
+      margin-bottom: 6px;
+    }
+
+    .step-title {
+      font-size: 0.98rem;
+      font-weight: 600;
+      margin: 0 0 6px;
+      color: var(--color-deep-indigo);
+    }
+
+    .step-body {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      margin: 0;
+    }
+
+    .section-get-started {
+      background: linear-gradient(135deg, #FFFFFF, #F5F7FB);
+    }
+
+    /* Process */
+    .process-section {
+      background: #F9FAFB;
+    }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .process-item {
+      padding: 16px 16px 14px;
+      border-radius: 14px;
+      background: #FFFFFF;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
+    }
+
+    .process-label {
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--color-deep-indigo);
+      margin-bottom: 4px;
+    }
+
+    .process-label span {
+      color: var(--color-text-muted);
+    }
+
+    .process-text {
+      font-size: 0.88rem;
+      color: var(--color-text-muted);
+      margin: 0;
+    }
+
+    /* Project snapshots */
+    .section-work {
+      background: #FFFFFF;
+    }
+
+    .snapshot-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--color-accent-teal);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 4px;
+    }
+
+    .snapshot-type {
+      font-size: 0.98rem;
+      font-weight: 600;
+      margin: 0 0 6px;
+      color: var(--color-deep-indigo);
+    }
+
+    .snapshot-desc {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      margin: 0 0 8px;
+    }
+
+    .snapshot-outcome-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      margin: 0 0 2px;
+    }
+
+    .snapshot-outcome-text {
+      font-size: 0.88rem;
+      color: var(--color-text-main);
+      margin: 0;
+    }
+
+    /* Principles */
+    .principles-section {
+      /* inherits body bg */
+    }
+
+    .principle-title {
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: var(--color-deep-indigo);
+      margin: 0 0 6px;
+    }
+
+    .principle-text {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      margin: 0;
+    }
+
+    /* Testimonials */
+    .testimonials {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .testimonial-card {
+      position: relative;
+      padding-top: 22px;
+    }
+
+    .testimonial-quote {
+      font-size: 0.94rem;
+      color: var(--color-text-main);
+      margin: 0 0 10px;
+    }
+
+    .testimonial-meta {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+    }
+
+    .quote-mark {
+      position: absolute;
+      top: 10px;
+      inset-inline-start: 18px;
+      width: 18px;
+      height: 18px;
+      border-radius: 6px;
+      background: rgba(27, 181, 166, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: var(--color-accent-teal);
+    }
+
+    /* FAQ */
+    .faq-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .faq-item {
+      border-radius: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: #FFFFFF;
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      padding: 10px 14px;
+      border: none;
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      cursor: pointer;
+      font-size: 0.92rem;
+      color: var(--color-deep-indigo);
+    }
+
+    .faq-toggle-icon {
+      font-size: 1rem;
+      color: var(--color-text-muted);
+      transition: transform var(--transition-fast);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.22s ease-out, padding 0.22s ease-out;
+      padding: 0 14px;
+    }
+
+    .faq-answer p {
+      margin: 8px 0 12px;
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 800px;
+      padding-bottom: 8px;
+    }
+
+    .faq-item.open .faq-toggle-icon {
+      transform: rotate(90deg);
+    }
+
+    /* Resources */
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .resource-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.16);
+      font-size: 0.75rem;
+      color: #4B5563;
+      margin-bottom: 6px;
+    }
+
+    .resource-title {
+      font-size: 0.98rem;
+      font-weight: 600;
+      margin: 0 0 6px;
+      color: var(--color-deep-indigo);
+    }
+
+    .resource-text {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      margin: 0;
+    }
+
+    /* Contact */
+    .section-contact {
+      background: #FFFFFF;
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr);
+      gap: 32px;
+      align-items: flex-start;
+    }
+
+    .contact-list {
+      list-style: none;
+      padding: 0;
+      margin: 12px 0 18px;
+      font-size: 0.92rem;
+      color: var(--color-text-main);
+    }
+
+    .contact-list li + li {
+      margin-top: 6px;
+    }
+
+    .contact-label {
+      font-weight: 600;
+      color: var(--color-text-muted);
+      font-size: 0.85rem;
+    }
+
+    .contact-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .contact-actions a {
+      font-size: 0.86rem;
+    }
+
+    .contact-form {
+      background: #F9FAFB;
+      border-radius: 18px;
+      padding: 18px 18px 16px;
+      border: 1px solid #E5E7EB;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 0.85rem;
+    }
+
+    .form-group-full {
+      grid-column: 1 / -1;
+    }
+
+    .form-group label {
+      color: var(--color-text-main);
+      font-weight: 500;
+    }
+
+    .form-field,
+    .form-select,
+    .form-textarea {
+      border-radius: 10px;
+      border: 1px solid #D1D5DB;
+      padding: 8px 10px;
+      font-size: 0.88rem;
+      font-family: inherit;
+      background: #FFFFFF;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+    }
+
+    .form-textarea {
+      min-height: 96px;
+      resize: vertical;
+    }
+
+    .form-field:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      outline: none;
+      border-color: var(--color-accent-teal);
+      box-shadow: 0 0 0 1px rgba(27, 181, 166, 0.4);
+      background: #FFFFFF;
+    }
+
+    body[data-lang="ar"] input.form-field:not([type="email"]),
+    body[data-lang="ar"] textarea.form-textarea,
+    body[data-lang="ar"] select.form-select {
+      text-align: right;
+    }
+
+    .form-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 14px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .form-note {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+    }
+
+    .form-message {
+      font-size: 0.86rem;
+      color: var(--color-accent-teal);
+      margin-top: 10px;
+      display: none;
+    }
+
+    .form-message.visible {
+      display: block;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid #E5E7EB;
+      background: #FFFFFF;
+      padding-block: 14px;
+      font-size: 0.82rem;
+      color: var(--color-text-muted);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .footer-meta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: 0.8rem;
+    }
+
+    .footer-meta a {
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      text-decoration-thickness: 1px;
+    }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+      .hero-grid {
+        grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr);
+      }
+      .card-grid-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .card-grid-4,
+      .process-steps,
+      .steps-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .contact-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header-inner {
+        padding-block: 10px;
+      }
+
+      .main-nav {
+        position: absolute;
+        inset-inline: 0;
+        top: 100%;
+        background: rgba(248, 250, 252, 0.97);
+        border-bottom: 1px solid #E5E7EB;
+        padding: 10px 16px 12px;
+        display: block;
+        max-height: 0;
+        opacity: 0;
+        pointer-events: none;
+        transition: max-height 0.22s ease-out, opacity 0.22s ease-out;
+      }
+
+      .main-nav.open {
+        max-height: 320px;
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .nav-list {
+        flex-direction: column;
+        gap: 6px;
+        margin-bottom: 10px;
+      }
+
+      .header-actions {
+        justify-content: flex-start;
+      }
+
+      .nav-toggle {
+        display: inline-flex;
+        margin-inline-start: auto;
+      }
+
+      .hero-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      section {
+        padding-block: 40px;
+      }
+
+      .card-grid-3,
+      .card-grid-4,
+      .process-steps,
+      .steps-grid,
+      .testimonials,
+      .faq-list,
+      .resources-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .trust-strip {
+        padding-block: 8px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  
+    /* Accessibility & anchor improvements */
+    section[id] {
+      scroll-margin-top: 80px;
+    }
+
+    .btn:focus-visible,
+    .lang-btn:focus-visible {
+      outline: 2px solid var(--color-accent-teal);
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 400px) {
+      .hero-title {
+        font-size: 1.6rem;
+      }
+    }
+
+  </style>
+</head>
+<body data-lang="en">
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#hero" class="brand">
+        <div class="logo-mark" aria-hidden="true"></div>
+        <div class="brand-text">
+          <span class="brand-line-main">
+            <span class="text-en">Think &amp; Cite</span>
+            <span class="text-ar">فكّر &amp; وثّق</span>
+          </span>
+          <span class="brand-line-sub">
+            <span class="text-en">Research support from idea to reference</span>
+            <span class="text-ar">دعم بحثي من الفكرة حتى المراجع</span>
+          </span>
+        </div>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="main-nav" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="#services"><span class="text-en">Services</span><span class="text-ar">الخدمات</span></a></li>
+          <li><a href="#process"><span class="text-en">Process</span><span class="text-ar">المنهجية</span></a></li>
+          <li><a href="#work"><span class="text-en">Work</span><span class="text-ar">نماذج الأعمال</span></a></li>
+          <li><a href="#faq"><span class="text-en">FAQ</span><span class="text-ar">الأسئلة الشائعة</span></a></li>
+          <li><a href="#contact"><span class="text-en">Contact</span><span class="text-ar">تواصل معنا</span></a></li>
+        </ul>
+        <div class="header-actions">
+          <a href="#contact" class="btn btn-primary">
+            <span class="text-en">Start project</span>
+            <span class="text-ar">ابدأ مشروعك</span>
+          </a>
+          <div class="lang-switch" aria-label="Language switch" role="group">
+            <button class="lang-btn active" type="button" data-lang-target="en" aria-pressed="true">EN</button>
+            <button class="lang-btn" type="button" data-lang-target="ar" aria-pressed="false">AR</button>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <main>
+    <section id="hero" class="section-hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="hero-kicker">
+            <span class="text-en">Academic research support</span>
+            <span class="text-ar">دعم للأبحاث الأكاديمية</span>
+          </div>
+          <h1 class="hero-title">
+            <span class="text-en">From first idea to final reference.</span>
+            <span class="text-ar">من أول فكرة إلى آخر مرجع.</span>
+          </h1>
+          <p class="hero-subtitle">
+            <span class="text-en">
+              Think &amp; Cite helps you plan, write, edit, format, and cite your academic work calmly and professionally — from the first question to the final reference list.
+            </span>
+            <span class="text-ar">
+              "فكّر &amp; وثّق" يساعدك على تخطيط وكتابة ومراجعة وتنسيق وتوثيق عملك الأكاديمي بهدوء ومهنية – من أول سؤال حتى قائمة المراجع النهائية.
+            </span>
+          </p>
+
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary">
+              <span class="text-en">Start a project now</span>
+              <span class="text-ar">ابدأ مشروعك الآن</span>
+            </a>
+            <a href="#services" class="btn btn-secondary">
+              <span class="text-en">View services</span>
+              <span class="text-ar">تعرّف على الخدمات</span>
+            </a>
+          </div>
+
+          <ul class="icon-list">
+            <li>
+              <span class="text-en">Research proposals and academic papers.</span>
+              <span class="text-ar">مقترحات بحثية وأوراق علمية.</span>
+            </li>
+            <li>
+              <span class="text-en">Theses and graduation projects.</span>
+              <span class="text-ar">الرسائل العلمية ومشاريع التخرج.</span>
+            </li>
+            <li>
+              <span class="text-en">Editing, formatting, and citation styles.</span>
+              <span class="text-ar">المراجعة اللغوية والتنسيق وأنماط التوثيق.</span>
+            </li>
+          </ul>
+        </div>
+
+        <aside class="hero-card" aria-label="Overview of how Think &amp; Cite can help">
+          <div class="pill">
+            <span class="pill-dot"></span>
+            <span class="text-en">At a glance</span>
+            <span class="text-ar">لمحة سريعة</span>
+          </div>
+          <h2 class="hero-card-title">
+            <span class="text-en">Support for serious research work</span>
+            <span class="text-ar">دعم للأعمال البحثية الجادة</span>
+          </h2>
+          <p class="hero-card-body">
+            <span class="text-en">
+              We work with undergraduate, master’s, PhD students, and professionals who need structured, bilingual support without losing their own voice.
+            </span>
+            <span class="text-ar">
+              نعمل مع طلاب البكالوريوس والماجستير والدكتوراه والمهنيين ممن يحتاجون إلى دعم منظم وثنائي اللغة دون أن يفقدوا صوتهم الخاص.
+            </span>
+          </p>
+          <ul class="icon-list">
+            <li>
+              <span class="text-en">Levels: Undergraduate, Master’s, PhD, professional.</span>
+              <span class="text-ar">المستويات: بكالوريوس، ماجستير، دكتوراه، مهنيون.</span>
+            </li>
+            <li>
+              <span class="text-en">Outputs: proposals, theses, articles, and reports.</span>
+              <span class="text-ar">المخرجات: مقترحات، رسائل، مقالات، وتقارير.</span>
+            </li>
+            <li>
+              <span class="text-en">Languages: Arabic, English, or mixed documents.</span>
+              <span class="text-ar">اللغات: العربية، الإنجليزية، أو مزيج بينهما.</span>
+            </li>
+          </ul>
+          <div class="hero-card-tags">
+            <span class="hero-card-tag">
+              <span class="text-en">Calm &amp; structured</span>
+              <span class="text-ar">هادئ ومنظم</span>
+            </span>
+            <span class="hero-card-tag">
+              <span class="text-en">Academic integrity</span>
+              <span class="text-ar">نزاهة أكاديمية</span>
+            </span>
+            <span class="hero-card-tag">
+              <span class="text-en">Bilingual support</span>
+              <span class="text-ar">دعم ثنائي اللغة</span>
+            </span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Social proof strip -->
+    <section class="trust-strip">
+      <div class="container trust-strip-inner">
+        <span class="trust-dot" aria-hidden="true"></span>
+        <p>
+          <span class="text-en">Think &amp; Cite has supported students and researchers across different fields and universities.</span>
+          <span class="text-ar">قدّمت "فكّر &amp; وثّق" دعماً لطلاب وباحثين من تخصصات وجامعات مختلفة.</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="services-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-kicker">
+            <span class="text-en">Services</span>
+            <span class="text-ar">الخدمات</span>
+          </div>
+          <h2 class="section-title">
+            <span class="text-en">From topic choice to clean references.</span>
+            <span class="text-ar">من اختيار الموضوع حتى ضبط المراجع.</span>
+          </h2>
+          <p class="section-subtitle">
+            <span class="text-en">
+              Three core areas that cover most academic projects: topic &amp; proposal support, academic writing &amp; structure, and editing, formatting &amp; citation.
+            </span>
+            <span class="text-ar">
+              ثلاث مجالات أساسية تغطي أغلب المشاريع الأكاديمية: دعم اختيار الموضوع والمقترح، والكتابة الأكاديمية وبناء الفصول، والمراجعة اللغوية والتنسيق والتوثيق.
+            </span>
+          </p>
+        </div>
+
+        <div class="card-grid-3">
+          <!-- Service 1 -->
+          <article class="card service-card">
+            <div class="card-header">
+              <h3 class="card-title">
+                <span class="text-en">Topic &amp; proposal support</span>
+                <span class="text-ar">دعم اختيار الموضوع وإعداد المقترح</span>
+              </h3>
+              <p class="card-subtitle">
+                <span class="text-en">Turn a vague idea into a clear, feasible, and academically sound research proposal.</span>
+                <span class="text-ar">تحويل الفكرة العامة إلى مقترح بحثي واضح وقابل للتنفيذ ومتوافق مع المعايير الأكاديمية.</span>
+              </p>
+            </div>
+            <div class="card-body">
+              <ul class="icon-list">
+                <li>
+                  <span class="text-en">Clarifying and narrowing your research problem and questions.</span>
+                  <span class="text-ar">توضيح مشكلة البحث وأسئلته وتضييق نطاقها.</span>
+                </li>
+                <li>
+                  <span class="text-en">Structuring proposal sections and defining objectives and methodology.</span>
+                  <span class="text-ar">تنظيم أقسام المقترح وتحديد الأهداف والمنهجية.</span>
+                </li>
+                <li>
+                  <span class="text-en">Ensuring alignment with supervisor and university requirements.</span>
+                  <span class="text-ar">ضمان توافق المقترح مع متطلبات المشرف والجامعة.</span>
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Service 2 -->
+          <article class="card service-card">
+            <div class="card-header">
+              <h3 class="card-title">
+                <span class="text-en">Academic writing &amp; structure</span>
+                <span class="text-ar">الكتابة الأكاديمية وبناء الفصول</span>
+              </h3>
+              <p class="card-subtitle">
+                <span class="text-en">Organize chapters and strengthen your argument, while keeping your own voice as the author.</span>
+                <span class="text-ar">تنظيم الفصول وتقوية الحجة العلمية مع الحفاظ على صوتك أنت ككاتب للبحث.</span>
+              </p>
+            </div>
+            <div class="card-body">
+              <ul class="icon-list">
+                <li>
+                  <span class="text-en">Designing logical chapter and section outlines.</span>
+                  <span class="text-ar">تصميم مخطط منطقي للفصول والأقسام.</span>
+                </li>
+                <li>
+                  <span class="text-en">Improving flow, transitions, and paragraph structure.</span>
+                  <span class="text-ar">تحسين التسلسل والانتقالات وبناء الفقرات.</span>
+                </li>
+                <li>
+                  <span class="text-en">Strengthening arguments with appropriate academic sources.</span>
+                  <span class="text-ar">تعزيز الحجج بالمصادر العلمية المناسبة.</span>
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Service 3 -->
+          <article class="card service-card">
+            <div class="card-header">
+              <h3 class="card-title">
+                <span class="text-en">Editing, formatting &amp; citation</span>
+                <span class="text-ar">المراجعة اللغوية والتنسيق والتوثيق</span>
+              </h3>
+              <p class="card-subtitle">
+                <span class="text-en">Polish your document so it reads clearly and follows the required academic style.</span>
+                <span class="text-ar">صقل المستند ليكون واضحًا ومتماسكًا ومتوافقًا مع النمط الأكاديمي المطلوب.</span>
+              </p>
+            </div>
+            <div class="card-body">
+              <ul class="icon-list">
+                <li>
+                  <span class="text-en">Editing for clarity, consistency, and academic tone.</span>
+                  <span class="text-ar">مراجعة النصوص من حيث الوضوح والاتساق والنبرة الأكاديمية.</span>
+                </li>
+                <li>
+                  <span class="text-en">Formatting headings, tables, figures, and pagination.</span>
+                  <span class="text-ar">تنسيق العناوين والجداول والأشكال وترقيم الصفحات.</span>
+                </li>
+                <li>
+                  <span class="text-en">Checking references and citations (APA, MLA, etc.).</span>
+                  <span class="text-ar">مراجعة المراجع والتوثيق وفقًا لأنماط مثل APA وMLA وغيرها.</span>
+                </li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- How to get started -->
+    <section class="section-get-started">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-kicker">
+            <span class="text-en">Getting started</span>
+            <span class="text-ar">كيف نبدأ</span>
+          </div>
+          <h2 class="section-title">
+            <span class="text-en">A simple 4-step path to support.</span>
+            <span class="text-ar">أربع خطوات بسيطة للحصول على الدعم.</span>
+          </h2>
+          <p class="section-subtitle">
+            <span class="text-en">Share your project, understand the options, agree on scope and fees, and then start working with clarity.</span>
+            <span class="text-ar">شارك تفاصيل مشروعك، وافهم خيارات الدعم، واتفق على نطاق العمل والرسوم، ثم ابدأ العمل بثقة ووضوح.</span>
+          </p>
+        </div>
+
+        <div class="steps-grid">
+          <!-- Step 1 -->
+          <article class="card">
+            <div class="step-label">
+              <span class="text-en">Step 01</span>
+              <span class="text-ar">الخطوة 01</span>
+            </div>
+            <h3 class="step-title">
+              <span class="text-en">Share your project</span>
+              <span class="text-ar">شاركنا مشروعك</span>
+            </h3>
+            <p class="step-body">
+              <span class="text-en">Send a short description of your topic, level, deadline, and what you need help with.</span>
+              <span class="text-ar">أرسل وصفًا مختصرًا لموضوعك ومستواك الدراسي وموعد التسليم وما تحتاج إليه من دعم.</span>
+            </p>
+          </article>
+
+          <!-- Step 2 -->
+          <article class="card">
+            <div class="step-label">
+              <span class="text-en">Step 02</span>
+              <span class="text-ar">الخطوة 02</span>
+            </div>
+            <h3 class="step-title">
+              <span class="text-en">We review &amp; respond</span>
+              <span class="text-ar">نطّلع على التفاصيل ونرد عليك</span>
+            </h3>
+            <p class="step-body">
+              <span class="text-en">We review your information and suggest the type of support and an indicative timeline.</span>
+              <span class="text-ar">نطّلع على معلوماتك ونقترح نوع الدعم المناسب مع إطار زمني تقريبي.</span>
+            </p>
+          </article>
+
+          <!-- Step 3 -->
+          <article class="card">
+            <div class="step-label">
+              <span class="text-en">Step 03</span>
+              <span class="text-ar">الخطوة 03</span>
+            </div>
+            <h3 class="step-title">
+              <span class="text-en">Agree on scope &amp; fees</span>
+              <span class="text-ar">الاتفاق على نطاق العمل والرسوم</span>
+            </h3>
+            <p class="step-body">
+              <span class="text-en">We confirm the deliverables, milestones, and fees so everything is transparent from the start.</span>
+              <span class="text-ar">نحدّد المخرجات والمحطات الرئيسية والرسوم بشكل واضح منذ البداية.</span>
+            </p>
+          </article>
+
+          <!-- Step 4 -->
+          <article class="card">
+            <div class="step-label">
+              <span class="text-en">Step 04</span>
+              <span class="text-ar">الخطوة 04</span>
+            </div>
+            <h3 class="step-title">
+              <span class="text-en">Start the work</span>
+              <span class="text-ar">البدء في العمل</span>
+            </h3>
+            <p class="step-body">
+              <span class="text-en">We begin with the agreed plan and keep you involved, so you stay in control of your research.</span>
+              <span class="text-ar">نبدأ تنفيذ الخطة المتفق عليها مع إبقائك مشاركًا في كل مرحلة لتظل متحكمًا في بحثك.</span>
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process -->
+    <section id="process" class="process-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-kicker">
+            <span class="text-en">Process</span>
+            <span class="text-ar">المنهجية</span>
+          </div>
+          <h2 class="section-title">
+            <span class="text-en">Think · Plan · Write · Cite.</span>
+            <span class="text-ar">فكّر · خطّط · اكتب · وثّق.</span>
+          </h2>
+          <p class="section-subtitle">
+            <span class="text-en">A simple logic that keeps every research project grounded, organized, and properly documented.</span>
+            <span class="text-ar">منهج بسيط يحافظ على أي مشروع بحثي منظمًا ومرتبطًا بالمصادر وموثقًا بشكل صحيح.</span>
+          </p>
+        </div>
+
+        <div class="process-steps">
+          <!-- Think -->
+          <article class="process-item">
+            <div class="process-label">
+              <span class="text-en">Think</span>
+              <span class="text-ar">فكّر</span>
+            </div>
+            <p class="process-text">
+              <span class="text-en">Clarify your questions, objectives, and key concepts before writing a single page.</span>
+              <span class="text-ar">توضيح أسئلة البحث وأهدافه والمفاهيم الأساسية قبل البدء في كتابة أي صفحة.</span>
+            </p>
+          </article>
+
+          <!-- Plan -->
+          <article class="process-item">
+            <div class="process-label">
+              <span class="text-en">Plan</span>
+              <span class="text-ar">خطّط</span>
+            </div>
+            <p class="process-text">
+              <span class="text-en">Define structure, chapters, and milestones so you always know what comes next.</span>
+              <span class="text-ar">تحديد الهيكل العام والفصول والمحطات الرئيسية لتعرف دائمًا ما هي الخطوة التالية.</span>
+            </p>
+          </article>
+
+          <!-- Write -->
+          <article class="process-item">
+            <div class="process-label">
+              <span class="text-en">Write</span>
+              <span class="text-ar">اكتب</span>
+            </div>
+            <p class="process-text">
+              <span class="text-en">Draft and refine your text with clear arguments and an academic tone that still sounds like you.</span>
+              <span class="text-ar">كتابة النصوص وصقلها بحجج واضحة ونبرة أكاديمية مع الحفاظ على أسلوبك الشخصي.</span>
+            </p>
+          </article>
+
+          <!-- Cite -->
+          <article class="process-item">
+            <div class="process-label">
+              <span class="text-en">Cite</span>
+              <span class="text-ar">وثّق</span>
+            </div>
+            <p class="process-text">
+              <span class="text-en">Organize sources and format citations so every reference can be easily traced and verified.</span>
+              <span class="text-ar">تنظيم المصادر وتنسيق التوثيق بحيث يمكن تتبع كل مرجع والتحقق منه بسهولة.</span>
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Project snapshots -->
+    <section id="work" class="section-work">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-kicker">
+            <span class="text-en">Project snapshots</span>
+            <span class="text-ar">نماذج من المشاريع</span>
+          </div>
+          <h2 class="section-title">
+            <span class="text-en">Discreet, anonymous examples of real support.</span>
+            <span class="text-ar">أمثلة حقيقية للدعم بشكل سري ومجهول.</span>
+          </h2>
+          <p class="section-subtitle">
+            <span class="text-en">We keep projects confidential. These snapshots are simplified examples of the kind of support we provide.</span>
+            <span class="text-ar">نحافظ على سرية المشاريع؛ هذه النماذج مجرد أمثلة مبسّطة لطبيعة الدعم الذي نقدمه.</span>
+          </p>
+        </div>
+
+        <div class="card-grid-3">
+          <!-- Snapshot 1 -->
+          <article class="card">
+            <p class="snapshot-label">
+              <span class="text-en">Project 01</span>
+              <span class="text-ar">المشروع 01</span>
+            </p>
+            <p class="snapshot-type">
+              <span class="text-en">Master’s thesis in Education</span>
+              <span class="text-ar">رسالة ماجستير في التربية</span>
+            </p>
+            <p class="snapshot-desc">
+              <span class="text-en">
+                Supported a master’s student in refining a mixed-methods research question, planning chapters, and revising academic language in Arabic.
+              </span>
+              <span class="text-ar">
+                دعم طالبة ماجستير في ضبط سؤال بحث بمنهجية مختلطة، وتخطيط الفصول، ومراجعة اللغة الأكاديمية بالعربية.
+              </span>
+            </p>
+            <p class="snapshot-outcome-label">
+              <span class="text-en">Outcome</span>
+              <span class="text-ar">النتيجة</span>
+            </p>
+            <p class="snapshot-outcome-text">
+              <span class="text-en">Thesis submitted on time and accepted with minor revisions.</span>
+              <span class="text-ar">تم تسليم الرسالة في الموعد وقبولها مع تعديلات طفيفة.</span>
+            </p>
+          </article>
+
+          <!-- Snapshot 2 -->
+          <article class="card">
+            <p class="snapshot-label">
+              <span class="text-en">Project 02</span>
+              <span class="text-ar">المشروع 02</span>
+            </p>
+            <p class="snapshot-type">
+              <span class="text-en">Undergraduate project in Business</span>
+              <span class="text-ar">مشروع تخرج في إدارة الأعمال</span>
+            </p>
+            <p class="snapshot-desc">
+              <span class="text-en">
+                Helped a group of students narrow a broad topic, structure their report, and prepare clear tables and figures.
+              </span>
+              <span class="text-ar">
+                مساعدة مجموعة من الطلاب على تضييق موضوع واسع، وبناء هيكل التقرير، وإعداد جداول وأشكال توضيحية واضحة.
+              </span>
+            </p>
+            <p class="snapshot-outcome-label">
+              <span class="text-en">Outcome</span>
+              <span class="text-ar">النتيجة</span>
+            </p>
+            <p class="snapshot-outcome-text">
+              <span class="text-en">Project felt coherent in presentation and easier to follow for the evaluation committee.</span>
+              <span class="text-ar">كان العرض النهائي للمشروع مترابطًا وأسهل في المتابعة للجنة التقييم.</span>
+            </p>
+          </article>
+
+          <!-- Snapshot 3 -->
+          <article class="card">
+            <p class="snapshot-label">
+              <span class="text-en">Project 03</span>
+              <span class="text-ar">المشروع 03</span>
+            </p>
+            <p class="snapshot-type">
+              <span class="text-en">PhD article based on a dissertation</span>
+              <span class="text-ar">مقال علمي مشتق من رسالة دكتوراه</span>
+            </p>
+            <p class="snapshot-desc">
+              <span class="text-en">
+                Worked with a PhD candidate to adapt a dissertation chapter into a journal article with focused argument and updated references.
+              </span>
+              <span class="text-ar">
+                العمل مع باحث دكتوراه لتحويل فصل من الرسالة إلى مقال علمي بمحتوى مركز ومراجع محدّثة.
+              </span>
+            </p>
+            <p class="snapshot-outcome-label">
+              <span class="text-en">Outcome</span>
+              <span class="text-ar">النتيجة</span>
+            </p>
+            <p class="snapshot-outcome-text">
+              <span class="text-en">Article submitted to a peer-reviewed journal with clearer structure and citation.</span>
+              <span class="text-ar">تقديم المقال إلى مجلة محكّمة بهيكل أوضح وتوثيق أدق.</span>
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Principles -->
+    <section class="principles-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-kicker">
+            <span class="text-en">Principles</span>
+            <span class="text-ar">المرتكزات</span>
+          </div>
+          <h2 class="section-title">
+            <span class="text-en">How we work with you.</span>
+            <span class="text-ar">كيف نعمل معك.</span>
+          </h2>
+          <p class="section-subtitle">
+            <span class="text-en">Four principles guide every project: integrity, confidentiality, relevance to your field, and real learning.</span>
+            <span class="text-ar">أربع مرتكزات تحكم كل مشروع: النزاهة، والسرية، وملاءمة التخصص، وتعزيز التعلّم.</span>
+          </p>
+        </div>
+
+        <div class="card-grid-4">
+          <!-- Principle 1 -->
+          <article class="card">
+            <h3 class="principle-title">
+              <span class="text-en">Academic integrity</span>
+              <span class="text-ar">النزاهة الأكاديمية</span>
+            </h3>
+            <p class="principle-text">
+              <span class="text-en">
+                We do not sell ready-made research. We help you think, structure, and refine your own work so it remains truly yours.
+              </span>
+              <span class="text-ar">
+                لا نبيع أبحاثًا جاهزة؛ نساعدك على التفكير وبناء الهيكل وصقل عملك ليبقى ملكًا فكريًا لك.
+              </span>
+            </p>
+          </article>
+
+          <!-- Principle 2 -->
+          <article class="card">
+            <h3 class="principle-title">
+              <span class="text-en">Confidentiality</span>
+              <span class="text-ar">السرية</span>
+            </h3>
+            <p class="principle-text">
+              <span class="text-en">
+                Your topics, drafts, and feedback stay between us. We treat every project with full discretion.
+              </span>
+              <span class="text-ar">
+                تبقى مواضيعك ومسوداتك وملاحظاتك بيننا؛ نتعامل مع كل مشروع بسرية تامة.
+              </span>
+            </p>
+          </article>
+
+          <!-- Principle 3 -->
+          <article class="card">
+            <h3 class="principle-title">
+              <span class="text-en">Tailored to your field</span>
+              <span class="text-ar">ملائم لتخصصك</span>
+            </h3>
+            <p class="principle-text">
+              <span class="text-en">
+                Support is adapted to your discipline, requirements, and preferred citation style.
+              </span>
+              <span class="text-ar">
+                يتم تكييف الدعم مع تخصصك ومتطلبات جهتك العلمية ونمط التوثيق المفضّل لديك.
+              </span>
+            </p>
+          </article>
+
+          <!-- Principle 4 -->
+          <article class="card">
+            <h3 class="principle-title">
+              <span class="text-en">Clarity &amp; learning</span>
+              <span class="text-ar">الوضوح والتعلّم</span>
+            </h3>
+            <p class="principle-text">
+              <span class="text-en">
+                Our goal is not only a polished document, but also that you understand the structure and choices behind it.
+              </span>
+              <span class="text-ar">
+                هدفنا ليس مستندًا منسقًا فقط، بل أن تفهم أنت أيضًا هيكل البحث وخياراته المنهجية.
+              </span>
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-kicker">
+            <span class="text-en">Testimonials</span>
+            <span class="text-ar">آراء</span>
+          </div>
+          <h2 class="section-title">
+            <span class="text-en">Calm support when it matters most.</span>
+            <span class="text-ar">دعم هادئ في أكثر المراحل حساسية.</span>
+          </h2>
+          <p class="section-subtitle">
+            <span class="text-en">Short reflections from students who needed structure, not shortcuts.</span>
+            <span class="text-ar">آراء مختصرة لطلاب احتاجوا إلى التنظيم لا إلى الطرق المختصرة.</span>
+          </p>
+        </div>
+
+        <div class="testimonials">
+          <!-- Testimonial 1 -->
+          <article class="card testimonial-card">
+            <div class="quote-mark">“</div>
+            <p class="testimonial-quote">
+              <span class="text-en">
+                During my M.A. I was overwhelmed by the thesis structure. Think &amp; Cite helped me organize the chapters and improve my academic writing without changing my ideas.
+              </span>
+              <span class="text-ar">
+                أثناء إعداد رسالة الماجستير شعرت أن هيكل الرسالة معقّد. ساعدتني "فكّر &amp; وثّق" على تنظيم الفصول وتحسين الكتابة الأكاديمية دون تغيير أفكاري.
+              </span>
+            </p>
+            <p class="testimonial-meta">
+              <span class="text-en">M.A. student in Education</span>
+              <span class="text-ar">طالبة ماجستير في التربية</span>
+            </p>
+          </article>
+
+          <!-- Testimonial 2 -->
+          <article class="card testimonial-card">
+            <div class="quote-mark">“</div>
+            <p class="testimonial-quote">
+              <span class="text-en">
+                As a PhD candidate, I needed feedback on logic, not just language. The comments on structure and citation helped me prepare a cleaner article for submission.
+              </span>
+              <span class="text-ar">
+                كباحث دكتوراه كنت أحتاج إلى ملاحظات على المنطق قبل اللغة. ساعدتني التعليقات على البناء والتوثيق في إعداد مقال أوضح للتقديم.
+              </span>
+            </p>
+            <p class="testimonial-meta">
+              <span class="text-en">PhD candidate in Social Sciences</span>
+              <span class="text-ar">مرشح دكتوراه في العلوم الاجتماعية</span>
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="faq-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-kicker">
+            <span class="text-en">FAQ</span>
+            <span class="text-ar">الأسئلة الشائعة</span>
+          </div>
+          <h2 class="section-title">
+            <span class="text-en">Questions you might already have.</span>
+            <span class="text-ar">أسئلة قد تدور في ذهنك.</span>
+          </h2>
+          <p class="section-subtitle">
+            <span class="text-en">If you still wonder about something, reach out and ask directly.</span>
+            <span class="text-ar">إن بقي لديك أي استفسار، راسلنا مباشرة واسأل بكل وضوح.</span>
+          </p>
+        </div>
+
+        <div class="faq-list">
+          <!-- Q1 -->
+          <article class="faq-item">
+            <button type="button" class="faq-question" id="faq-q1" aria-expanded="false" aria-controls="faq-a1">
+              <span>
+                <span class="text-en">Do you write the entire research for clients?</span>
+                <span class="text-ar">هل تكتبون البحث بالكامل بدلاً عن العميل؟</span>
+              </span>
+              <span class="faq-toggle-icon" aria-hidden="true">›</span>
+            </button>
+            <div class="faq-answer" id="faq-a1" role="region" aria-labelledby="faq-q1">
+              <p>
+                <span class="text-en">
+                  No. We support you with thinking, structure, writing guidance, editing, formatting, and citation. The research ideas, data, and final submitted text must remain your own work to respect academic integrity.
+                </span>
+                <span class="text-ar">
+                  لا. نحن نساعدك في التفكير، وبناء الهيكل، وتوجيه الكتابة، والمراجعة، والتنسيق، والتوثيق. أما الأفكار والبيانات والنص النهائي المقدم فيجب أن يكون عملك أنت حفاظًا على النزاهة الأكاديمية.
+                </span>
+              </p>
+            </div>
+          </article>
+
+          <!-- Q2 -->
+          <article class="faq-item">
+            <button type="button" class="faq-question" id="faq-q2" aria-expanded="false" aria-controls="faq-a2">
+              <span>
+                <span class="text-en">Which fields and levels do you support?</span>
+                <span class="text-ar">ما التخصصات والمستويات التي تدعمونها؟</span>
+              </span>
+              <span class="faq-toggle-icon" aria-hidden="true">›</span>
+            </button>
+            <div class="faq-answer" id="faq-a2" role="region" aria-labelledby="faq-q2">
+              <p>
+                <span class="text-en">
+                  We mainly work with undergraduate, master’s, and PhD students, as well as early-career professionals. Fields often include education, business, social sciences, and related areas, but you can contact us about other disciplines.
+                </span>
+                <span class="text-ar">
+                  نعمل أساسًا مع طلاب البكالوريوس والماجستير والدكتوراه، إضافة إلى المهنيين في بدايات مسارهم. غالبًا ما تكون التخصصات في التربية والأعمال والعلوم الاجتماعية والمجالات القريبة، ويمكنك الاستفسار عن أي تخصص آخر.
+                </span>
+              </p>
+            </div>
+          </article>
+
+          <!-- Q3 -->
+          <article class="faq-item">
+            <button type="button" class="faq-question" id="faq-q3" aria-expanded="false" aria-controls="faq-a3">
+              <span>
+                <span class="text-en">Can you help in Arabic and English?</span>
+                <span class="text-ar">هل يمكنكم المساعدة بالعربية والإنجليزية؟</span>
+              </span>
+              <span class="faq-toggle-icon" aria-hidden="true">›</span>
+            </button>
+            <div class="faq-answer" id="faq-a3" role="region" aria-labelledby="faq-q3">
+              <p>
+                <span class="text-en">
+                  Yes. We work with Arabic documents, English documents, and mixed projects where parts are in each language, including bilingual abstracts and summaries.
+                </span>
+                <span class="text-ar">
+                  نعم. نعمل مع مستندات باللغة العربية أو الإنجليزية، ومع المشاريع التي تجمع بين اللغتين، بما في ذلك الملخصات والملخصات التنفيذية ثنائية اللغة.
+                </span>
+              </p>
+            </div>
+          </article>
+
+          <!-- Q4 -->
+          <article class="faq-item">
+            <button type="button" class="faq-question" id="faq-q4" aria-expanded="false" aria-controls="faq-a4">
+              <span>
+                <span class="text-en">When should I contact you before my deadline?</span>
+                <span class="text-ar">متى يجب أن أتواصل معكم قبل موعد التسليم؟</span>
+              </span>
+              <span class="faq-toggle-icon" aria-hidden="true">›</span>
+            </button>
+            <div class="faq-answer" id="faq-a4" role="region" aria-labelledby="faq-q4">
+              <p>
+                <span class="text-en">
+                  The earlier the better. For major projects like theses or graduation projects, contacting us several weeks in advance is ideal. For smaller tasks like formatting or citation checks, a few days may be enough depending on our schedule.
+                </span>
+                <span class="text-ar">
+                  كلما كان التواصل أبكر كان أفضل. في المشاريع الكبيرة مثل الرسائل أو مشاريع التخرج يُفضّل التواصل قبل عدة أسابيع، أما المهام الأصغر مثل التنسيق أو مراجعة المراجع فقد تكفي بضعة أيام بحسب جدول العمل.
+                </span>
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Resources -->
+    <section class="resources-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-kicker">
+            <span class="text-en">Resources</span>
+            <span class="text-ar">المصادر</span>
+          </div>
+          <h2 class="section-title">
+            <span class="text-en">Short guides, coming soon.</span>
+            <span class="text-ar">أدلة قصيرة قيد الإعداد.</span>
+          </h2>
+          <p class="section-subtitle">
+            <span class="text-en">We’re preparing simple, practical resources to help you make more confident decisions in your research.</span>
+            <span class="text-ar">نحضّر مواد عملية وبسيطة تساعدك على اتخاذ قرارات أوضح في بحثك.</span>
+          </p>
+        </div>
+
+        <div class="resources-grid">
+          <!-- Resource 1 -->
+          <article class="card">
+            <div class="resource-pill">
+              <span class="text-en">Coming soon</span>
+              <span class="text-ar">قريبًا</span>
+            </div>
+            <h3 class="resource-title">
+              <span class="text-en">How to choose a research topic</span>
+              <span class="text-ar">كيف تختار موضوع بحثك</span>
+            </h3>
+            <p class="resource-text">
+              <span class="text-en">
+                A short guide to move from “too broad” or “too vague” topics to clear and researchable questions.
+              </span>
+              <span class="text-ar">
+                دليل مختصر يساعدك على الانتقال من موضوعات عامة أو غامضة إلى أسئلة بحثية واضحة وقابلة للدراسة.
+              </span>
+            </p>
+          </article>
+
+          <!-- Resource 2 -->
+          <article class="card">
+            <div class="resource-pill">
+              <span class="text-en">Coming soon</span>
+              <span class="text-ar">قريبًا</span>
+            </div>
+            <h3 class="resource-title">
+              <span class="text-en">Common academic writing mistakes</span>
+              <span class="text-ar">أخطاء شائعة في الكتابة الأكاديمية</span>
+            </h3>
+            <p class="resource-text">
+              <span class="text-en">
+                Examples of wording, structure, and citation issues that often weaken otherwise strong research.
+              </span>
+              <span class="text-ar">
+                أمثلة على مشكلات في الصياغة والبناء والتوثيق تضعف أحيانًا أبحاثًا جيدة في مضمونها.
+              </span>
+            </p>
+          </article>
+
+          <!-- Resource 3 -->
+          <article class="card">
+            <div class="resource-pill">
+              <span class="text-en">Coming soon</span>
+              <span class="text-ar">قريبًا</span>
+            </div>
+            <h3 class="resource-title">
+              <span class="text-en">Introduction to citation styles</span>
+              <span class="text-ar">مقدمة في أنماط التوثيق</span>
+            </h3>
+            <p class="resource-text">
+              <span class="text-en">
+                A simple overview of APA, MLA, Chicago, and more — with practical examples in Arabic and English.
+              </span>
+              <span class="text-ar">
+                نظرة مبسّطة على أنماط مثل APA وMLA وChicago وغيرها مع أمثلة عملية بالعربية والإنجليزية.
+              </span>
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section-contact">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-kicker">
+            <span class="text-en">Contact</span>
+            <span class="text-ar">تواصل معنا</span>
+          </div>
+          <h2 class="section-title">
+            <span class="text-en">Tell us about your project.</span>
+            <span class="text-ar">حدّثنا عن مشروعك.</span>
+          </h2>
+          <p class="section-subtitle">
+            <span class="text-en">
+              Share a few details and we’ll reply with how we can support you, what we suggest doing, and an estimated timeline.
+            </span>
+            <span class="text-ar">
+              شارك بعض التفاصيل وسنرد عليك بكيفية تقديم الدعم، وما نقترح القيام به، والمدة الزمنية التقريبية.
+            </span>
+          </p>
+        </div>
+
+        <div class="contact-layout">
+          <!-- Contact info -->
+          <div>
+            <ul class="contact-list">
+              <li>
+                <span class="contact-label">
+                  <span class="text-en">Email</span>
+                  <span class="text-ar">البريد الإلكتروني</span>
+                  :
+                </span>
+                <span> hello@thinkandcite.com </span>
+              </li>
+              <li>
+                <span class="contact-label">
+                  <span class="text-en">WhatsApp</span>
+                  <span class="text-ar">واتساب</span>
+                  :
+                </span>
+                <span> +000 000 000 000 </span>
+              </li>
+              <li>
+                <span class="contact-label">
+                  <span class="text-en">Telegram</span>
+                  <span class="text-ar">تيليجرام</span>
+                  :
+                </span>
+                <span> @thinkandcite </span>
+              </li>
+              <li>
+                <span class="contact-label">
+                  <span class="text-en">Instagram</span>
+                  <span class="text-ar">إنستغرام</span>
+                  :
+                </span>
+                <span> @thinkandcite </span>
+              </li>
+            </ul>
+
+            <div class="contact-actions">
+              <a href="#" class="btn btn-outline">
+                <span class="text-en">Chat on WhatsApp</span>
+                <span class="text-ar">محادثة واتساب</span>
+              </a>
+              <a href="https://t.me/thinkandcite" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+                <span class="text-en">Message on Telegram</span>
+                <span class="text-ar">راسلنا على تيليجرام</span>
+              </a>
+              <a href="mailto:hello@thinkandcite.com" class="btn btn-outline">
+                <span class="text-en">Send an email</span>
+                <span class="text-ar">أرسل بريدًا إلكترونيًا</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Contact form -->
+          <div>
+            <form id="contactForm" class="contact-form">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="name">
+                    <span class="text-en">Name</span>
+                    <span class="text-ar">الاسم</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    class="form-field"
+                    required
+                    data-placeholder-en="Your full name"
+                    data-placeholder-ar="اسمك الكامل"
+                    placeholder="Your full name"
+                  >
+                </div>
+
+                <div class="form-group">
+                  <label for="email">
+                    <span class="text-en">Email</span>
+                    <span class="text-ar">البريد الإلكتروني</span>
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    class="form-field"
+                    required
+                    data-placeholder-en="name@example.com"
+                    data-placeholder-ar="name@example.com"
+                    placeholder="name@example.com"
+                  >
+                </div>
+
+                <div class="form-group">
+                  <label for="level">
+                    <span class="text-en">Level</span>
+                    <span class="text-ar">المستوى</span>
+                  </label>
+                  <select
+                    id="level"
+                    name="level"
+                    class="form-select"
+                    required
+                    data-placeholder-en="Select your current level"
+                    data-placeholder-ar="اختر مستواك الدراسي"
+                  >
+                    <option value="" disabled selected
+                      data-text-en="Select your current level"
+                      data-text-ar="اختر مستواك الدراسي"
+                    >
+                      Select your current level
+                    </option>
+                    <option value="undergraduate"
+                      data-text-en="Undergraduate"
+                      data-text-ar="بكالوريوس"
+                    >
+                      Undergraduate
+                    </option>
+                    <option value="masters"
+                      data-text-en="Master’s"
+                      data-text-ar="ماجستير"
+                    >
+                      Master’s
+                    </option>
+                    <option value="phd"
+                      data-text-en="PhD"
+                      data-text-ar="دكتوراه"
+                    >
+                      PhD
+                    </option>
+                    <option value="professional"
+                      data-text-en="Professional"
+                      data-text-ar="مهني"
+                    >
+                      Professional
+                    </option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="projectType">
+                    <span class="text-en">Project type</span>
+                    <span class="text-ar">نوع المشروع</span>
+                  </label>
+                  <select
+                    id="projectType"
+                    name="projectType"
+                    class="form-select"
+                    required
+                    data-placeholder-en="Select the type of project"
+                    data-placeholder-ar="اختر نوع المشروع"
+                  >
+                    <option value="" disabled selected
+                      data-text-en="Select the type of project"
+                      data-text-ar="اختر نوع المشروع"
+                    >
+                      Select the type of project
+                    </option>
+                    <option value="proposal"
+                      data-text-en="Proposal"
+                      data-text-ar="مقترح بحث"
+                    >
+                      Proposal
+                    </option>
+                    <option value="thesis"
+                      data-text-en="Thesis / Graduation project"
+                      data-text-ar="رسالة / مشروع تخرج"
+                    >
+                      Thesis / Graduation project
+                    </option>
+                    <option value="article"
+                      data-text-en="Article"
+                      data-text-ar="مقال علمي"
+                    >
+                      Article
+                    </option>
+                    <option value="report"
+                      data-text-en="Report"
+                      data-text-ar="تقرير"
+                    >
+                      Report
+                    </option>
+                    <option value="other"
+                      data-text-en="Other"
+                      data-text-ar="أخرى"
+                    >
+                      Other
+                    </option>
+                  </select>
+                </div>
+
+                <div class="form-group form-group-full">
+                  <label for="description">
+                    <span class="text-en">Brief description</span>
+                    <span class="text-ar">وصف مختصر</span>
+                  </label>
+                  <textarea
+                    id="description"
+                    name="description"
+                    class="form-textarea"
+                    required
+                    data-placeholder-en="Share your topic, deadline, and what you need help with."
+                    data-placeholder-ar="اكتب موضوعك وموعد التسليم وما تحتاج إليه من دعم."
+                    placeholder="Share your topic, deadline, and what you need help with."
+                  ></textarea>
+                </div>
+              </div>
+
+              <div class="form-footer">
+                <button type="submit" class="btn btn-primary">
+                  <span class="text-en">Send project details</span>
+                  <span class="text-ar">أرسل تفاصيل مشروعك</span>
+                </button>
+                <p class="form-note">
+                  <span class="text-en">We usually reply within 1–2 working days.</span>
+                  <span class="text-ar">نحاول الرد خلال 1–2 يوم عمل عادةً.</span>
+                </p>
+              </div>
+            </form>
+            <p id="formMessage" class="form-message">
+              <span class="text-en">Thank you for your message. We will get back to you soon.</span>
+              <span class="text-ar">شكرًا لرسالتك، سنعود إليك في أقرب وقت ممكن.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-inner">
+      <div>
+        <span class="text-en">© <span id="currentYear"></span> Think &amp; Cite. All rights reserved.</span>
+        <span class="text-ar">© <span id="currentYearAr"></span> فكّر &amp; وثّق. جميع الحقوق محفوظة.</span>
+      </div>
+      <div class="footer-meta">
+        <span>
+          <span class="text-en">Calm, structured support for serious research.</span>
+          <span class="text-ar">دعم هادئ ومنظم لأبحاثك الجادة.</span>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      // Dynamic year (for both EN and AR spans)
+      var year = new Date().getFullYear();
+      var yearSpanEn = document.getElementById('currentYear');
+      var yearSpanAr = document.getElementById('currentYearAr');
+      if (yearSpanEn) yearSpanEn.textContent = year;
+      if (yearSpanAr) yearSpanAr.textContent = year;
+
+      // Language toggle
+      var bodyEl = document.body;
+      var langButtons = document.querySelectorAll('.lang-btn');
+
+      function updateLanguageDependentText(lang) {
+        // Update placeholders for inputs/textarea
+        var elements = document.querySelectorAll('[data-placeholder-en]');
+        elements.forEach(function (el) {
+          var enVal = el.getAttribute('data-placeholder-en') || '';
+          var arVal = el.getAttribute('data-placeholder-ar') || '';
+          if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+            el.setAttribute('placeholder', lang === 'ar' ? arVal : enVal);
+          }
+        });
+
+        // Update select option texts
+        var options = document.querySelectorAll('option[data-text-en]');
+        options.forEach(function (opt) {
+          var text = opt.getAttribute(lang === 'ar' ? 'data-text-ar' : 'data-text-en') || '';
+          opt.textContent = text;
+        });
+      }
+
+      function setLanguage(lang) {
+        var isArabic = (lang === 'ar');
+        // Update root document language and direction for accessibility
+        document.documentElement.setAttribute('lang', isArabic ? 'ar' : 'en');
+        document.documentElement.setAttribute('dir', isArabic ? 'rtl' : 'ltr');
+
+        // Toggle data-lang on body to control bilingual text visibility and layout
+        bodyEl.setAttribute('data-lang', lang);
+
+        // Update toggle button styles and aria-pressed state
+        langButtons.forEach(function (btn) {
+          var isActive = btn.getAttribute('data-lang-target') === lang;
+          btn.classList.toggle('active', isActive);
+          btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        });
+
+        updateLanguageDependentText(lang);
+
+        // Remember user's preference when possible
+        try {
+          localStorage.setItem('tc_lang', lang);
+        } catch (e) {}
+      }
+
+      langButtons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var targetLang = btn.getAttribute('data-lang-target') || 'en';
+          setLanguage(targetLang);
+        });
+      });
+
+      // Mobile nav toggle
+      var navToggle = document.querySelector('.nav-toggle');
+      var mainNav = document.querySelector('.main-nav');
+
+      if (navToggle && mainNav) {
+        navToggle.addEventListener('click', function () {
+          var isOpen = mainNav.classList.toggle('open');
+          navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        // Close nav when clicking a link (on mobile)
+        mainNav.querySelectorAll('a').forEach(function (link) {
+          link.addEventListener('click', function () {
+            if (mainNav.classList.contains('open')) {
+              mainNav.classList.remove('open');
+              navToggle.setAttribute('aria-expanded', 'false');
+            }
+          });
+        });
+      }
+
+      // FAQ accordion
+      var faqItems = document.querySelectorAll('.faq-item');
+      faqItems.forEach(function (item) {
+        var questionBtn = item.querySelector('.faq-question');
+        var answer = item.querySelector('.faq-answer');
+        if (!questionBtn || !answer) return;
+
+        questionBtn.addEventListener('click', function () {
+          var currentlyOpen = item.classList.contains('open');
+
+          // Close others
+          faqItems.forEach(function (other) {
+            if (other !== item) {
+              other.classList.remove('open');
+              var otherBtn = other.querySelector('.faq-question');
+              if (otherBtn) {
+                otherBtn.setAttribute('aria-expanded', 'false');
+              }
+            }
+          });
+
+          // Toggle current
+          var newOpenState = !currentlyOpen;
+          item.classList.toggle('open', newOpenState);
+          questionBtn.setAttribute('aria-expanded', newOpenState ? 'true' : 'false');
+        });
+      });
+
+      // Contact form (front-end only)
+      var contactForm = document.getElementById('contactForm');
+      var formMessage = document.getElementById('formMessage');
+
+      if (contactForm) {
+        contactForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+          // Simple front-end "submit" feedback
+          contactForm.reset();
+          updateLanguageDependentText(bodyEl.getAttribute('data-lang') || 'en');
+          if (formMessage) {
+            formMessage.classList.add('visible');
+          }
+        });
+      }
+
+      // Initialize defaults (respect saved preference if available)
+      var savedLang = 'en';
+      try {
+        var stored = localStorage.getItem('tc_lang');
+        if (stored === 'ar' || stored === 'en') {
+          savedLang = stored;
+        }
+      } catch (e) {}
+      setLanguage(savedLang);
+    })();
+  </script>
+</body>
+</html>
